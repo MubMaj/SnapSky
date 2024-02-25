@@ -1,3 +1,4 @@
+import { WeatherService } from './../service/weather.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+
+  constructor(
+    private service: WeatherService,
+  ){}
+  
+  weatherData: any;
+
+  clickme(){
+    this.service.getWeatherData('New Delhi').subscribe((res) => {
+      console.log(res);
+      this.weatherData = res;
+    })
+  };
 
 }

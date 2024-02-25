@@ -1,1 +1,14 @@
-<p>home works!</p>
+<main>
+    <div>
+        <h2>home works!</h2>
+    </div>
+    <div class="container">
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Saepe cupiditate nobis nihil excepturi molestiae quis tenetur, tempora magnam et nisi eveniet harum esse labore assumenda. Nobis sed qui vitae assumenda, quam, optio aperiam soluta corrupti cupiditate voluptatem ipsam quia voluptatibus provident aliquid, cumque laudantium a?</p>
+    </div>
+    <button (click)="clickme()">Click Me</button>
+    <br>
+    <div *ngIf="weatherData">
+        <h1>{{ weatherData.location.name }}</h1>
+        <p>Temperature: {{ weatherData.current.temp_c }}°C</p>
+      </div>
+</main>
