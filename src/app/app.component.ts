@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BackgroundService } from './service/background.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'WeatherApp';
+  title = 'SnapSky';
+  public backgroundService: BackgroundService;
+
+  constructor(private _backgroundService: BackgroundService) {
+    this.backgroundService = _backgroundService;
+  }
 }

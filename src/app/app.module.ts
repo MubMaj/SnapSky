@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { WeatherService } from './service/weather.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,8 @@ import { WeatherService } from './service/weather.service';
     HeaderComponent
   ],
   imports: [
+    ReactiveFormsModule,
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule

@@ -1,14 +1,21 @@
-<main>
-    <div>
-        <h2>home works!</h2>
-    </div>
-    <div class="container">
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Saepe cupiditate nobis nihil excepturi molestiae quis tenetur, tempora magnam et nisi eveniet harum esse labore assumenda. Nobis sed qui vitae assumenda, quam, optio aperiam soluta corrupti cupiditate voluptatem ipsam quia voluptatibus provident aliquid, cumque laudantium a?</p>
-    </div>
-    <button (click)="clickme()">Click Me</button>
-    <br>
-    <div *ngIf="weatherData">
-        <h1>{{ weatherData.location.name }}</h1>
-        <p>Temperature: {{ weatherData.current.temp_c }}°C</p>
-      </div>
-</main>
+   <section class="border">
+        <div>
+            <h2>Weather App</h2>
+        </div>
+        <div class="container border" [formGroup]="searchForm">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search City" name="search" id="search" formControlName="city">
+            <button  class="btn btn-outline-success my-2 my-sm-0" (click)="searchWeather()">Search</button>
+        </div>
+        <div *ngIf="PhotoData && PhotoData.length > 0" class="card" style="width: 18rem;">
+            <img src="{{PhotoData[0].src.medium}}" class="card-img-top" alt="city ph">
+            <div class="card-body">
+              <h5 class="card-title">{{ weatherData.location.name }}</h5>
+              <p class="card-text">{{ weatherData.current.temp_c}}°C</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">An item</li>
+              <li class="list-group-item">A second item</li>
+              <li class="list-group-item">A third item</li>
+            </ul>
+          </div>
+    </section>
