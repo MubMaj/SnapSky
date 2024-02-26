@@ -1,4 +1,4 @@
-   <section class="border">
+   <section class="border mainSection">
         <div>
             <h2>Weather App</h2>
         </div>
@@ -9,8 +9,8 @@
         <div *ngIf="PhotoData && PhotoData.length > 0" class="card" style="width: 18rem;">
             <img src="{{PhotoData[0].src.medium}}" class="card-img-top" alt="city ph">
             <div class="card-body">
-              <h5 class="card-title">{{ weatherData.location.name }}</h5>
-              <p class="card-text">{{ weatherData.current.temp_c}}°C</p>
+              <h5 class="card-title">{{ weatherData?.location.name }}</h5>
+              <p class="card-text">{{ weatherData?.current.temp_c}}°C</p>
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">An item</li>

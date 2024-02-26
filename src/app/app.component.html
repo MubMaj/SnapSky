@@ -1,4 +1,6 @@
 <app-header></app-header>
-<main class="mainContainer d-flex" [ngStyle]="{'background-image': (backgroundService.currentBackgroundImage | async)}">
+<div class="background-container" [ngStyle]="{'background-image': (backgroundService.currentBackgroundImage | async)}">
+</div>
+<main class="mainContainer d-flex">
     <router-outlet></router-outlet>
 </main>

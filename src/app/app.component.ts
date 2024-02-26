@@ -12,5 +12,6 @@ export class AppComponent {
 
   constructor(private _backgroundService: BackgroundService) {
     this.backgroundService = _backgroundService;
+    this.backgroundService.updateBackgroundImage('url(./assets/img/temp.jpg)');
   }
 }
