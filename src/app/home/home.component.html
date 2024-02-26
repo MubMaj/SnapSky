@@ -1,21 +1,25 @@
-   <section class="border mainSection">
-        <div>
-            <h2>Weather App</h2>
-        </div>
-        <div class="container border" [formGroup]="searchForm">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search City" name="search" id="search" formControlName="city">
-            <button  class="btn btn-outline-success my-2 my-sm-0" (click)="searchWeather()">Search</button>
-        </div>
-        <div *ngIf="PhotoData && PhotoData.length > 0" class="card" style="width: 18rem;">
-            <img src="{{PhotoData[0].src.medium}}" class="card-img-top" alt="city ph">
-            <div class="card-body">
-              <h5 class="card-title">{{ weatherData?.location.name }}</h5>
-              <p class="card-text">{{ weatherData?.current.temp_c}}°C</p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">An item</li>
-              <li class="list-group-item">A second item</li>
-              <li class="list-group-item">A third item</li>
-            </ul>
-          </div>
-    </section>
+<section class="mainSection">
+  <div>
+    <h1>Weather App</h1>
+  </div>
+  <div class="container searchBox" [formGroup]="searchForm">
+    <input class="form-control mr-sm-2" type="text" placeholder="Search City" name="search" id="search" formControlName="city" (keydown.enter)="searchWeather()">
+    <button class="btn btn-danger my-2 my-sm-0" (click)="searchWeather()">Search</button>
+  </div>
+  <div class="card subSection">
+    <div class="card-img">
+      <img [src]="PhotoData[0]?.src?.medium || './assets/img/temp.jpg'" class="card-img-top" alt="city ph">
+    </div>
+    <div class="card-body">
+      <h5 class="card-text">{{ weatherData.current.temp_c}}°C</h5>
+      <p class="card-text">Feels Like :{{ weatherData.current.feelslike_c || ' 21' }}°C</p>
+      <p class="card-title temp">{{ weatherData.location.name}}</p>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Condition :<span> {{ weatherData.current.condition?.text || ' Sunny' }}</span></li>
+        <li class="list-group-item">Humidity :{{ weatherData.current.humidity || ' 21' }}</li>
+        <li class="list-group-item">Wind Speed :{{ weatherData.current.wind_kph || ' 21' }} KPH</li>
+        <li class="list-group-item">Visibility :{{ weatherData.current.vis_km || ' 21' }} KM</li>
+      </ul>
+    </div>
+  </div>
+</section>

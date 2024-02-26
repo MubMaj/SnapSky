@@ -11,10 +11,13 @@ import { BackgroundService } from '../service/background.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  searchForm!: FormGroup;
-  weatherData: any;
-  PhotoData: any;
-  private photoSubscription!: Subscription;
+  searchForm: FormGroup = this.fb.group({
+    city: [null, Validators.required],
+  });
+
+  weatherData: any = { location: { name: "No Man's Land" }, current: { temp_c: '21' } };
+  PhotoData: any[] = [{ src: { landscape: './assets/img/temp.jpg' } }];
+  private photoSubscription: Subscription = new Subscription();
 
   constructor(
     private service: WeatherService,
@@ -24,36 +27,38 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.searchForm = this.fb.group({
-      city: [null, Validators.required],
-    });
-
-    const backgroundUpdateInterval = interval(3000);
-    this.photoSubscription = backgroundUpdateInterval.subscribe(() => {
-      if (this.PhotoData && this.PhotoData.length > 0) {
+    this.photoSubscription = interval(3000).subscribe(() => {
+      if (this.PhotoData?.length) {
         const randomIndex = Math.floor(Math.random() * this.PhotoData.length);
-        const backgroundImage = `url("${this.PhotoData[randomIndex].src.landscape}")`;
+        const backgroundImage = `url("${this.PhotoData[randomIndex]?.src?.landscape}")`;
         this.BgService.updateBackgroundImage(backgroundImage);
       }
     });
   }
 
   ngOnDestroy() {
-    if (this.photoSubscription) {
-      this.photoSubscription.unsubscribe();
-    }
+    this.photoSubscription.unsubscribe();
   }
 
   searchWeather() {
-    this.service.getWeatherData(this.searchForm.get(['city'])!.value).subscribe((res) => {
-      this.weatherData = res;
-    });
+    const city = this.searchForm.get('city')?.value;
 
-    this.service2.getPhotoData(this.searchForm.get(['city'])!.value).subscribe((res) => {
-      this.PhotoData = res.photos;
+    this.service.getWeatherData(city).subscribe(
+      (res) => {
+        this.weatherData = res;
+        console.log(this.weatherData);
+        
+      },
+      (error) => {
+        console.error('Error fetching weather data:', error);
+      }
+    );
 
-      if (this.PhotoData && this.PhotoData.length > 0) {
-        const backgroundImage = `url("${this.PhotoData[0].src.landscape}")`;
+    this.service2.getPhotoData(city).subscribe((res) => {
+      this.PhotoData = res.photos || [];
+
+      if (this.PhotoData?.length) {
+        const backgroundImage = `url("${this.PhotoData[0]?.src?.landscape}")`;
         this.BgService.updateBackgroundImage(backgroundImage);
       }
     });
