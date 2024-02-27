@@ -1,0 +1,18 @@
+.logo{
+    width: 11vw;
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* responsive design  */
+
+@media (max-width: 736px) {
+
+    .logo {
+      width: 30vw;
+    }
+    .px-5{
+        padding-left: 2px;
+    }
+}
