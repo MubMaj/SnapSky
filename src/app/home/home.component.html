@@ -3,9 +3,12 @@
     <h1>Weather App</h1>
   </div>
   <div class="container searchBox" [formGroup]="searchForm">
-    <input class="form-control mr-sm-2" type="text" placeholder="Search City" name="search" id="search" formControlName="city" (keydown.enter)="searchWeather()">
+    <input class="form-control mr-sm-2" type="text" placeholder="Search City Name" name="search" id="search" formControlName="city" (keydown.enter)="searchWeather()">
     <button class="btn btn-danger my-2 my-sm-0" (click)="searchWeather()">Search</button>
   </div>
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+</div>
   <div class="card subSection">
     <div class="card-img">
       <img [src]="PhotoData[0]?.src?.medium || './assets/img/temp.jpg'" class="card-img-top" alt="city ph">
